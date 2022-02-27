@@ -24,9 +24,8 @@ func (g *Game) Init() {
 	}
 	g.aseImg = ebi.NewImage(int(aseFile.Header.WidthInPixels), int(aseFile.Header.HeightInPixels))
 	for _, cel := range aseFile.Frames[0].Cels {
-		//cel := aseFile.Frames[0].Cels[0]
 		dat := cel.RawCelData
-		w, h := cel.WidthInPix, cel.HeightInPix //aseFile.Header.WidthInPixels, aseFile.Header.HeightInPixels
+		w, h := cel.WidthInPix, cel.HeightInPix
 		offset := 0
 		for y := 0; y < int(h); y += 1 {
 			for x := 0; x < int(w); x, offset = x+1, offset+4 {
