@@ -3,6 +3,8 @@
 Asefile is a library for loading the aseprite file format. Included is an example of how to use the library, and then render a frame from aseprite using ebiten.
 
 - Not all features have been tested yet - eg encoding back into a file
+- Files where the image is encoded in different ways eg, raw pixel data as opposed to zlib compressed
+- Etc
 
 # Loading and rendering a frame
 The below code is a brief example of how you can load and render a frame to an ebiten image
