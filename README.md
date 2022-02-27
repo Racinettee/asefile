@@ -24,3 +24,9 @@ for _, cel := range aseFile.Frames[0].Cels {
     }
 }
 ```
+
+# Run the example
+If you clone the repository then
+`go run example/main.go`
+
+![result](chica.png)
