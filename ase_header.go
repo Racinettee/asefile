@@ -111,6 +111,7 @@ type AsepriteFrame struct {
 	ColorProfiles             []AsepriteColorProfileChunk2007
 	Tags                      AsepriteTagsChunk2018
 	Palettes                  []AsepritePaletteChunk2019
+	Slices                    []AsepriteSliceChunk2022
 }
 
 /**
