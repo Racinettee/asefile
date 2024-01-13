@@ -172,6 +172,7 @@ func (aseFrame *AsepriteFrame) Decode(r io.Reader) error {
 			var sliceDat AsepriteSliceChunk2022
 			sliceDat.Decode(r)
 			aseFrame.Slices = append(aseFrame.Slices, sliceDat)
+			lastUserdatHolder = &aseFrame.Slices[len(aseFrame.Slices)-1]
 			read += 1
 		default:
 			log.Printf("Unused chunk type: %X\n", chunkType)

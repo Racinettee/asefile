@@ -531,6 +531,11 @@ type AsepriteSliceChunk2022 struct {
 	Name         string
 	// + For each slice key
 	SliceKeysData []AsepriteSliceChunk2022Data
+	UserData      AsepriteUserDataChunk2020
+}
+
+func (sliceChunk *AsepriteSliceChunk2022) AddUserData(userDat AsepriteUserDataChunk2020) {
+	sliceChunk.UserData = userDat
 }
 
 type AsepriteSliceChunk2022Data struct {
