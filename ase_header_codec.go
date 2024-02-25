@@ -107,6 +107,7 @@ func (aseFrame *AsepriteFrame) Decode(r io.Reader) error {
 	aseFrame.Cels = make([]AsepriteCelChunk2005, 0)
 	aseFrame.ColorProfiles = make([]AsepriteColorProfileChunk2007, 0)
 	aseFrame.Palettes = make([]AsepritePaletteChunk2019, 0)
+	aseFrame.Slices = make([]AsepriteSliceChunk2022, 0)
 
 	loadChunks := 0
 	if aseFrame.ChunksThisFrameExt == 0 {
@@ -166,6 +167,12 @@ func (aseFrame *AsepriteFrame) Decode(r io.Reader) error {
 			if lastUserdatHolder != nil {
 				lastUserdatHolder.AddUserData(userDat)
 			}
+			read += 1
+		case 0x2022:
+			var sliceDat AsepriteSliceChunk2022
+			sliceDat.Decode(r)
+			aseFrame.Slices = append(aseFrame.Slices, sliceDat)
+			lastUserdatHolder = &aseFrame.Slices[len(aseFrame.Slices)-1]
 			read += 1
 		default:
 			log.Printf("Unused chunk type: %X\n", chunkType)
@@ -574,9 +581,10 @@ func (aseSlice *AsepriteSliceChunk2022) Decode(r io.Reader) {
 	aseSlice.Name = DecodeAseString(r)
 	aseSlice.SliceKeysData =
 		make([]AsepriteSliceChunk2022Data, aseSlice.NumSliceKeys)
-	for _, slice := range aseSlice.SliceKeysData {
+	for i, slice := range aseSlice.SliceKeysData {
 		slice.parentChunk = aseSlice
 		slice.Decode(r)
+		aseSlice.SliceKeysData[i] = slice
 	}
 }
 
